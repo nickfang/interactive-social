@@ -1,10 +1,13 @@
-<script>
-	const handleSubmit = () => {
-		console.log('submit');
+<script lang="ts">
+	const handleSubmit = (e: SubmitEvent) => {
+		const formData = new FormData(e.target as HTMLFormElement);
+		const data = Object.fromEntries(formData.entries());
+		console.log(data);
 	};
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<!-- on:submit|preventDefault={handleSubmit}> -->
+<form method="post" action="?/users/new">
 	<label>
 		First Name: <input type="text" name="first_name" />
 	</label>
