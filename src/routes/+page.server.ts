@@ -6,7 +6,5 @@ export const load = async () => {
 };
 
 const fetchData = async () => {
-	const users = await db.select().from(usersTable);
-	console.log(users);
-	return users;
+	return await db.select().from(usersTable);
 };
