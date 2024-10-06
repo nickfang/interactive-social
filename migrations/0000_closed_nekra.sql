@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"last_name" text,
 	"email" text,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "users_email_unique" UNIQUE("email")
+	CONSTRAINT "users_first_name_unique" UNIQUE("first_name"),
+	CONSTRAINT "users_last_name_unique" UNIQUE("last_name")
 );
 --> statement-breakpoint
 DO $$ BEGIN

@@ -13,7 +13,13 @@ import {
 } from '../schema';
 
 export async function createUser(data: InsertUser) {
-	await db.insert(usersTable).values(data);
+	console.log('createUser', data);
+	try {
+		await db.insert(usersTable).values(data);
+	} catch (error) {
+		console.log('createUser::error', error);
+		throw error;
+	}
 }
 
 export async function createExpectedOccupation(data: InsertExpectedOccupation) {

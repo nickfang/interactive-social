@@ -1,27 +1,20 @@
 import { createUser } from '$db/queries/insert';
+import { redirect } from '@sveltejs/kit';
 
 export const actions = {
-	default: async ({ request }) => {
+	createUser: async ({ request }) => {
 		const data = await request.formData();
-		const user = {
-			firstName: data.get('firstName') as string,
-			lastName: data.get('lastName') as string,
-			email: data.get('email') as string
-		};
+		const user = Object.fromEntries(data);
+		console.log('user', user);
 		try {
 			await createUser(user);
 			console.log('User created');
-			return {
-				status: 302,
-				headers: {
-					location: '/users'
-				}
-			};
 		} catch (error) {
 			return {
 				status: 500,
 				body: error instanceof Error ? error.message : 'An unknown error occurred'
 			};
 		}
+		throw redirect(303, '/users');
 	}
 };
