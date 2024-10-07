@@ -5,8 +5,16 @@
 </script>
 
 <form method="post" action="?/createConnectedOccupations">
-	<DropDown name="Actual Occupations" options={data.actualOccupationOptions} />
-	<DropDown name="Expected Occupations" options={data.expectedOccupationOptions} />
+	<DropDown
+		label="Actual Occupations"
+		name="actualOccupation"
+		options={data.actualOccupationOptions}
+	/>
+	<DropDown
+		label="Expected Occupations"
+		name="expectedOccupation"
+		options={data.expectedOccupationOptions}
+	/>
 
 	<button type="submit">Submit</button>
 </form>

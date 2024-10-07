@@ -23,16 +23,16 @@ export const load = async () => {
 export const actions = {
 	createConnectedOccupations: async ({ request }) => {
 		const data = await request.formData();
+		console.log('data', data);
 		const occupation = {
-			expectedOccupationId: data.get('expectedId') as string,
-			actualOccupationId: data.get('actualId') as string
-			// userId: data.get('userId') as string
+			expectedOccupationId: Number(data.get('expectedOccupation')),
+			actualOccupationId: Number(data.get('actualOccupation'))
 		};
 		try {
 			await createConnectedOccupations(occupation);
 		} catch (e) {
 			error(500, e instanceof Error ? e.message : 'An unknown error occurred');
 		}
-		throw redirect(303, '/actual-occupations');
+		throw redirect(303, '/connected-occupations');
 	}
 };
