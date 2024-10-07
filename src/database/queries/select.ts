@@ -1,7 +1,7 @@
 import { eq, asc, between, count, getTableColumns, sql } from 'drizzle-orm';
 import { db } from '../db';
 import type { SelectUser } from '../schema';
-import { usersTable } from '../schema';
+import { actualOccupationTable, expectedOccupationTable, usersTable } from '../schema';
 
 export async function getUserById(id: SelectUser['id']): Promise<
 	Array<{
@@ -12,6 +12,18 @@ export async function getUserById(id: SelectUser['id']): Promise<
 	}>
 > {
 	return db.select().from(usersTable).where(eq(usersTable.id, id));
+}
+
+export async function getActualOccupations(): Promise<
+	Array<{ id: number; title: string; createdAt: Date; updatedAt: Date }>
+> {
+	return db.select().from(actualOccupationTable);
+}
+
+export async function getExpectedOccupations(): Promise<
+	Array<{ id: number; title: string; createdAt: Date; updatedAt: Date }>
+> {
+	return db.select().from(expectedOccupationTable);
 }
 
 // export async function getUsersWithPostsCount(

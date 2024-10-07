@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { usersTable } from '$db/schema';
-
 	export let data;
 </script>
 

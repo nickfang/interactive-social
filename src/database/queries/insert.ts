@@ -24,6 +24,6 @@ export async function createActualOccupation(data: InsertActualOccupation) {
 	await db.insert(actualOccupationTable).values(data);
 }
 
-export async function createPost(data: InsertJoinOccupation) {
+export async function createConnectedOccupations(data: InsertJoinOccupation) {
 	await db.insert(joinOccupationsTable).values(data);
 }

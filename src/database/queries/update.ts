@@ -10,7 +10,7 @@ export async function updateExpectedOccupation(
 	await db.update(expectedOccupationTable).set(data).where(eq(expectedOccupationTable.id, id));
 }
 
-export async function updateActualOccupationTable(
+export async function updateActualOccupation(
 	id: SelectActualOccupation['id'],
 	data: Partial<Omit<SelectActualOccupation, 'id'>>
 ) {
