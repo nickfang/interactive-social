@@ -3,6 +3,9 @@
 </script>
 
 <h1>Expected Occupations</h1>
-{#each data.expectedOccupations as expectedOccupation}
-	<div>{JSON.stringify(expectedOccupation)}</div>
-{/each}
+<a href="/expected-occupations/new"> Add Expected Occupation </a>
+<p>
+	{#each data.expectedOccupations as expectedOccupation}
+		<a href={`/expected-occupations/update/${expectedOccupation.id}`}>{expectedOccupation.title}</a>
+	{/each}
+</p>

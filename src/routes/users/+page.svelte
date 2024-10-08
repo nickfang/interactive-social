@@ -4,5 +4,5 @@
 
 <h1>Users</h1>
 {#each data.users as user}
-	<div>{JSON.stringify(user)}</div>
+	<div>{user.lastName}, {user.firstName}</div>
 {/each}

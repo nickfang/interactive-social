@@ -11,7 +11,7 @@ export async function getUserById(id: SelectUser['id']): Promise<
 		email: string | null;
 	}>
 > {
-	return db.select().from(usersTable).where(eq(usersTable.id, id));
+	return db.selectDistinct().from(usersTable).where(eq(usersTable.id, id));
 }
 
 export async function getActualOccupations(): Promise<
@@ -20,10 +20,30 @@ export async function getActualOccupations(): Promise<
 	return db.select().from(actualOccupationTable);
 }
 
+export async function getActualOccupationById(
+	id: number
+): Promise<{ id: number; createdAt: Date; title: string; updatedAt: Date }> {
+	return db
+		.select()
+		.from(actualOccupationTable)
+		.where(eq(actualOccupationTable.id, id))
+		.then((result) => result[0]);
+}
+
 export async function getExpectedOccupations(): Promise<
 	Array<{ id: number; title: string; createdAt: Date; updatedAt: Date }>
 > {
 	return db.select().from(expectedOccupationTable);
+}
+
+export async function getExpectedOccupationById(
+	id: number
+): Promise<{ id: number; title: string; createdAt: Date; updatedAt: Date }> {
+	return db
+		.select()
+		.from(expectedOccupationTable)
+		.where(eq(expectedOccupationTable.id, id))
+		.then((result) => result[0]);
 }
 
 // export async function getUsersWithPostsCount(
