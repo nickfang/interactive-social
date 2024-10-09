@@ -7,8 +7,8 @@
 
 <p>{data.id}</p>
 <form>
-	<label for="title">Title</label>
-	<input type="text" value={data.actualOccupationUpdateTitle} placeholder="" />
+	<label for="title">New Title</label>
+	<input type="text" placeholder={data.title} />
 </form>
 
 <a href="/actual-occupations">Back</a>

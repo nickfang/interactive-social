@@ -1,8 +1,6 @@
-import actualOccupationUpdateTitle from '../../+page.svelte';
-
-export async function load({ params }) {
+export async function load({ params, url }) {
 	return {
 		id: params.id,
-		actualOccupationUpdateTitle
+		title: url.searchParams.get('title')
 	};
 }
