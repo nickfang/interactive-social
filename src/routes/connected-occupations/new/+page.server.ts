@@ -23,7 +23,6 @@ export const load = async () => {
 export const actions = {
 	createConnectedOccupations: async ({ request }) => {
 		const data = await request.formData();
-		console.log('data', data);
 		const occupation = {
 			expectedOccupationId: Number(data.get('expectedOccupation')),
 			actualOccupationId: Number(data.get('actualOccupation'))

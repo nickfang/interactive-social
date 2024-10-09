@@ -1,12 +1,14 @@
-import { createActualOccupation } from '$db/queries/insert';
+import { updateActualOccupation } from '$db/queries/update';
 import { redirect, error } from '@sveltejs/kit';
 
 export const actions = {
-	createActualOccupation: async ({ request }) => {
+	updateActualOccupation: async ({ request }) => {
 		try {
 			const data = await request.formData();
 			const occupation = { title: data.get('title') as string };
-			await createActualOccupation(occupation);
+			const id = data.get('id') as string;
+
+			await updateActualOccupation(Number(id), occupation);
 		} catch (e) {
 			error(500, e instanceof Error ? e.message : 'An unknown error occurred');
 		}

@@ -1,7 +1,6 @@
 <script>
 	import DropDown from '$lib/components/input/DropDown.svelte';
 	export let data;
-	console.log('connectioned-occupations/new', data);
 </script>
 
 <form method="post" action="?/createConnectedOccupations">
