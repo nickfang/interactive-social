@@ -3,9 +3,17 @@
 </script>
 
 <h1>Connected Occupations</h1>
-<a href="/connected-occupations/new"> Add Connected Occupation </a>
-<p>
-	{#each data.connectedOccupations as connectedOccupation}
-		<div>{JSON.stringify(connectedOccupation)}</div>
+<button on:click={() => (window.location.href = '/connected-occupations/new')}>New</button>
+<ul>
+	{#each data.valid as connectedOccupation}
+		<li>{JSON.stringify(connectedOccupation)}</li>
 	{/each}
-</p>
+</ul>
+<h2>Invalid</h2>
+<ul>
+	{#each data.invalid as connectedOccupation}
+		<li>{JSON.stringify(connectedOccupation)}</li>
+	{/each}
+</ul>
+
+<button on:click={() => (window.location.href = '/')}>back</button>

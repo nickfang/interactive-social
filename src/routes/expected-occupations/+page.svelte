@@ -45,3 +45,4 @@
 	{/each}
 </ul>
 
+<button on:click={() => (window.location.href = '/')}>Back</button>

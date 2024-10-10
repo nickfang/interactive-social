@@ -1,7 +1,12 @@
-import { eq, asc, between, count, getTableColumns, sql } from 'drizzle-orm';
+import { eq, or, isNull } from 'drizzle-orm';
 import { db } from '../db';
 import type { SelectUser } from '../schema';
-import { actualOccupationTable, expectedOccupationTable, usersTable } from '../schema';
+import {
+	actualOccupationTable,
+	expectedOccupationTable,
+	joinOccupationsTable,
+	usersTable
+} from '../schema';
 
 export async function getUserById(id: SelectUser['id']): Promise<
 	Array<{
@@ -46,48 +51,38 @@ export async function getExpectedOccupationById(
 		.then((result) => result[0]);
 }
 
-// export async function getUsersWithPostsCount(
-//   page = 1,
-//   pageSize = 5,
-// ): Promise<
-//   Array<{
-//     postsCount: number;
-//     id: number;
-//     name: string;
-//     age: number;
-//     email: string;
-//   }>
-// > {
-//   return db
-//     .select({
-//       ...getTableColumns(usersTable),
-//       postsCount: count(postsTable.id),
-//     })
-//     .from(usersTable)
-//     .leftJoin(postsTable, eq(usersTable.id, postsTable.userId))
-//     .groupBy(usersTable.id)
-//     .orderBy(asc(usersTable.id))
-//     .limit(pageSize)
-//     .offset((page - 1) * pageSize);
-// }
+export const getConnectedOccupations = async () => {
+	return await db
+		.select()
+		.from(joinOccupationsTable)
+		.innerJoin(
+			expectedOccupationTable,
+			eq(joinOccupationsTable.expectedOccupationId, expectedOccupationTable.id)
+		)
+		.innerJoin(
+			actualOccupationTable,
+			eq(joinOccupationsTable.actualOccupationId, actualOccupationTable.id)
+		);
+};
 
-// export async function getPostsForLast24Hours(
-//   page = 1,
-//   pageSize = 5,
-// ): Promise<
-//   Array<{
-//     id: number;
-//     title: string;
-//   }>
-// > {
-//   return db
-//     .select({
-//       id: postsTable.id,
-//       title: postsTable.title,
-//     })
-//     .from(postsTable)
-//     .where(between(postsTable.createdAt, sql`now() - interval '1 day'`, sql`now()`))
-//     .orderBy(asc(postsTable.title), asc(postsTable.id))
-//     .limit(pageSize)
-//     .offset((page - 1) * pageSize);
-// }
+// It is possible for a foreign key to point to a deleted record.
+// This query will return all records where the foreign key is invalid.
+export const getInvalidConnectedOccupations = async () => {
+	return await db
+		.select()
+		.from(joinOccupationsTable)
+		.leftJoin(
+			expectedOccupationTable,
+			eq(joinOccupationsTable.expectedOccupationId, expectedOccupationTable.id)
+		)
+		.leftJoin(
+			actualOccupationTable,
+			eq(joinOccupationsTable.actualOccupationId, actualOccupationTable.id)
+		)
+		.where(
+			or(
+				isNull(expectedOccupationTable), // Check for null in the joined table
+				isNull(actualOccupationTable) // Check for null in the joined table
+			)
+		);
+};

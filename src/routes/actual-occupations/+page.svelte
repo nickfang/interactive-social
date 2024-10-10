@@ -17,7 +17,7 @@
 
 				if (response.ok) {
 					console.log('Actual occupation deleted successfully!');
-					// Remove deleted actual occupation instead of getting all the expected occupations again
+					// Remove deleted actual occupation instead of getting all the actual occupations again
 					data.actualOccupations = data.actualOccupations.filter(
 						(occupation) => occupation.id !== id
 					);
@@ -32,7 +32,7 @@
 </script>
 
 <h1>Actual Occupations</h1>
-<a href="/actual-occupations/new"> Add Actual Occupation </a>
+<button on:click={() => (window.location.href = '/actual-occupations/new')}>New</button>
 <ul>
 	{#each data.actualOccupations as actualOccupation}
 		<li>
@@ -46,3 +46,5 @@
 		</li>
 	{/each}
 </ul>
+
+<button on:click={() => (window.location.href = '/')}>Back</button>

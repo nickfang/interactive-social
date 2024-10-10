@@ -17,3 +17,5 @@
 
 	<button type="submit">Submit</button>
 </form>
+
+<button on:click={() => (window.location.href = '/connected-occupations')}>back</button>

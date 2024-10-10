@@ -1,10 +1,12 @@
-import { db } from '$db/db';
-import { joinOccupationsTable } from '$db/schema';
+import { getConnectedOccupations, getInvalidConnectedOccupations } from '$db/queries/select';
 
 export const load = async () => {
-	return { connectedOccupations: await fetchData() };
+	return fetchData();
 };
 
 const fetchData = async () => {
-	return await db.select().from(joinOccupationsTable);
+	return {
+		valid: await getConnectedOccupations(),
+		invalid: await getInvalidConnectedOccupations()
+	};
 };
