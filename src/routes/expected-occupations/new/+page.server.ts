@@ -12,6 +12,6 @@ export const actions = {
 		} catch (e) {
 			error(500, e instanceof Error ? e.message : 'An unknown error occurred');
 		}
-		throw redirect(303, '/actual-occupations');
+		throw redirect(303, '/expected-occupations');
 	}
 };
