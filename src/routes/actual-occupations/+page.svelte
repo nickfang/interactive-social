@@ -4,6 +4,31 @@
 	import TrashIcon from '$lib/components/icons/TrashIcon.svelte';
 
 	export let data;
+	async function handleDelete(id: number) {
+		if (confirm('Are you sure you want to delete this actual occupation?')) {
+			try {
+				const formData = new FormData();
+				formData.append('id', id.toString()); // Add the ID to the form data
+
+				const response = await fetch('?/deleteActualOccupation', {
+					method: 'POST',
+					body: formData
+				});
+
+				if (response.ok) {
+					console.log('Actual occupation deleted successfully!');
+					// Remove deleted actual occupation instead of getting all the expected occupations again
+					data.actualOccupations = data.actualOccupations.filter(
+						(occupation) => occupation.id !== id
+					);
+				} else {
+					const errorData = await response.json();
+				}
+			} catch (error) {
+				console.error('Error deleting actual occupation:', error);
+			}
+		}
+	}
 </script>
 
 <h1>Actual Occupations</h1>
@@ -17,7 +42,7 @@
 			>
 				<EditIcon />
 			</a>
-			<a href={`/actual-occupations/delete/${actualOccupation.id}`}><TrashIcon /></a>
+			<a href="#" on:click={() => handleDelete(actualOccupation.id)}><TrashIcon /></a>
 		</li>
 	{/each}
 </ul>
