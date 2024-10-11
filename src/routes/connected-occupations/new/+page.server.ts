@@ -27,6 +27,7 @@ export const actions = {
 			expectedOccupationId: Number(data.get('expectedOccupation')),
 			actualOccupationId: Number(data.get('actualOccupation'))
 		};
+		console.log(occupation);
 		try {
 			await createConnectedOccupations(occupation);
 		} catch (e) {

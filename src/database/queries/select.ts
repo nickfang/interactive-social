@@ -52,7 +52,7 @@ export async function getExpectedOccupationById(
 }
 
 export const getConnectedOccupations = async () => {
-	return await db
+	const connectedOccupations = await db
 		.select()
 		.from(joinOccupationsTable)
 		.innerJoin(
@@ -63,6 +63,18 @@ export const getConnectedOccupations = async () => {
 			actualOccupationTable,
 			eq(joinOccupationsTable.actualOccupationId, actualOccupationTable.id)
 		);
+	return {
+		connectedOccupations: connectedOccupations.map((connectedOccupation) => ({
+			id: connectedOccupation.join_occupations.id,
+			userId: connectedOccupation.join_occupations.userId,
+			actualOccupationId: connectedOccupation.join_occupations.actualOccupationId,
+			expectedOccupationId: connectedOccupation.join_occupations.expectedOccupationId,
+			actualOccupation: connectedOccupation.actual_occupations,
+			expectedOccupation: connectedOccupation.expected_occupations,
+			createdAt: connectedOccupation.join_occupations.createdAt,
+			updatedAt: connectedOccupation.join_occupations.updatedAt
+		}))
+	};
 };
 
 // It is possible for a foreign key to point to a deleted record.

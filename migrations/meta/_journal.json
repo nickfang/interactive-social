@@ -1,5 +1,20 @@
 {
-	"version": "7",
-	"dialect": "postgresql",
-	"entries": []
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1728620177095,
+      "tag": "0000_keen_juggernaut",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1728661693296,
+      "tag": "0001_join-occupations-update",
+      "breakpoints": true
+    }
+  ]
 }

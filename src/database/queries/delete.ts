@@ -1,6 +1,11 @@
 import { db } from '../db';
 import { eq, and } from 'drizzle-orm';
-import type { SelectActualOccupation, SelectExpectedOccupation, SelectUser } from '../schema';
+import type {
+	SelectActualOccupation,
+	SelectExpectedOccupation,
+	SelectJoinOccupation,
+	SelectUser
+} from '../schema';
 import {
 	actualOccupationTable,
 	expectedOccupationTable,
@@ -18,6 +23,9 @@ export async function deleteActualOccupationById(id: SelectActualOccupation['id'
 
 export async function deleteExpectedOccupationById(id: SelectExpectedOccupation['id']) {
 	await db.delete(expectedOccupationTable).where(eq(expectedOccupationTable.id, id));
+}
+export async function deleteConnectedOccupationById(id: SelectJoinOccupation['id']) {
+	await db.delete(joinOccupationsTable).where(eq(joinOccupationsTable.id, id));
 }
 
 export async function deleteConnectedOccupationByIds(

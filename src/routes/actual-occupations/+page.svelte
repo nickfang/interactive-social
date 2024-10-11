@@ -10,7 +10,7 @@
 				const formData = new FormData();
 				formData.append('id', id.toString()); // Add the ID to the form data
 
-				const response = await fetch('?/deleteActualOccupation', {
+				const response = await fetch('?/deleteConnectedOccupation', {
 					method: 'POST',
 					body: formData
 				});
@@ -18,9 +18,9 @@
 				if (response.ok) {
 					console.log('Actual occupation deleted successfully!');
 					// Remove deleted actual occupation instead of getting all the actual occupations again
-					data.actualOccupations = data.actualOccupations.filter(
-						(occupation) => occupation.id !== id
-					);
+					// data.actualOccupations = data.actualOccupations.filter(
+					// 	(occupation) => occupation.id !== id
+					// );
 				} else {
 					const errorData = await response.json();
 				}

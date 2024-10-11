@@ -2,10 +2,13 @@ import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const usersTable = pgTable('users', {
 	id: serial('id').primaryKey(),
-	firstName: text('first_name').unique(),
-	lastName: text('last_name').unique(),
+	firstName: text('first_name').notNull(),
+	lastName: text('last_name').notNull(),
 	email: text('email'),
-	createdAt: timestamp('created_at').notNull().defaultNow()
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+	updatedAt: timestamp('updated_at')
+		.notNull()
+		.$onUpdate(() => new Date())
 });
 
 export const expectedOccupationTable = pgTable('expected_occupations', {
@@ -29,13 +32,16 @@ export const actualOccupationTable = pgTable('actual_occupations', {
 export const joinOccupationsTable = pgTable('join_occupations', {
 	id: serial('id').primaryKey(),
 	expectedOccupationId: integer('expected_occupation_id')
-		.references(() => usersTable.id)
+		.references(() => expectedOccupationTable.id)
 		.notNull(),
 	actualOccupationId: integer('actual_occupation_id')
-		.references(() => usersTable.id)
+		.references(() => actualOccupationTable.id)
 		.notNull(),
 	userId: integer('user_id').references(() => usersTable.id),
-	createdAt: timestamp('created_at').notNull().defaultNow()
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+	updatedAt: timestamp('updated_at')
+		.notNull()
+		.$onUpdate(() => new Date())
 });
 
 export type InsertUser = typeof usersTable.$inferInsert;
