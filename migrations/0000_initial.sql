@@ -47,8 +47,3 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
---> manually added because of wrong foreign keys in 0000_closed+nekra.sql migration
-DO $$ BEGIN
- ALTER TABLE "join_occupations" DROP CONSTRAINT "join_occupations_actual_occupation_id_users_id_fk";
- ALTER TABLE "join_occupations" DROP CONSTRAINT "join_occupations_actual_occupation_id_users_id_fk";
-END $$;
