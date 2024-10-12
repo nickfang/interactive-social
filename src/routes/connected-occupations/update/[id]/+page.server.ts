@@ -1,5 +1,5 @@
-import { createConnectedOccupations } from '$db/queries/insert';
-import { getActualOccupations, getExpectedOccupations } from '$db/queries/select.js';
+import { getActualOccupations, getExpectedOccupations } from '$db/queries/select';
+import { updateConnectedOccupations } from '$db/queries/update';
 import { redirect, error } from '@sveltejs/kit';
 
 const fetchData = async () => {
@@ -21,14 +21,15 @@ export const load = async () => {
 };
 
 export const actions = {
-	createConnectedOccupations: async ({ request }) => {
+	updateConnectedOccupations: async ({ request }) => {
 		const data = await request.formData();
-		const occupation = {
+		const id = data.get('id') as string;
+		const occupations = {
 			expectedOccupationId: Number(data.get('expectedOccupation')),
 			actualOccupationId: Number(data.get('actualOccupation'))
 		};
 		try {
-			await createConnectedOccupations(occupation);
+			await updateConnectedOccupations(Number(id), occupations);
 		} catch (e) {
 			error(500, e instanceof Error ? e.message : 'An unknown error occurred');
 		}

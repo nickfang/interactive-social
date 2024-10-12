@@ -15,7 +15,7 @@
 				});
 
 				if (response.ok) {
-					console.log('Actual occupation deleted successfully!');
+					console.log('Connected occupation deleted successfully!');
 					// Remove deleted actual occupation instead of getting all the actual occupations again
 					data.connectedOccupations = data.connectedOccupations.filter(
 						(connectedOccupation) => connectedOccupation.id !== id
@@ -37,7 +37,7 @@
 		<li>
 			{connectedOccupation.expectedOccupation.title} => {connectedOccupation.actualOccupation.title}
 			<a
-				href={`/actual-occupations/update/${connectedOccupation.id}/?actualOccupationId=${connectedOccupation.actualOccupationId}&expectedOccupationId=${connectedOccupation.expectedOccupationId}`}
+				href={`/connected-occupations/update/${connectedOccupation.id}/?actualOccupationId=${connectedOccupation.actualOccupationId}&expectedOccupationId=${connectedOccupation.expectedOccupationId}`}
 			>
 				<EditIcon />
 			</a>

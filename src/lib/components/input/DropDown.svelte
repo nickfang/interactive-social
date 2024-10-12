@@ -3,12 +3,17 @@
 
 	export let name: string;
 	export let label: string;
+	export let placeholder: string | null = null;
 	export let options: { value: string | number; label: string }[];
 
 	let selectedValue: string | number | null = null;
 	let isOpen = false;
 	let dropdownRef: HTMLDivElement;
 	let menuRef: HTMLDivElement;
+
+	if (placeholder) {
+		selectedValue = Number(placeholder);
+	}
 
 	const handleOptionClick = (option: { value: string | number; label: string }) => {
 		selectedValue = option.value;
@@ -19,7 +24,7 @@
 <label for={name}>
 	{label}
 	<div class="relative inline-block" bind:this={dropdownRef}>
-		<button type="button" on:click={() => (isOpen = !isOpen)}>
+		<button type="button" {placeholder} on:click={() => (isOpen = !isOpen)}>
 			{options.find((option) => option.value === selectedValue)?.label || 'Select an Option'}
 		</button>
 		{#if isOpen}

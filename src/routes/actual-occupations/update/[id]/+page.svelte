@@ -13,4 +13,4 @@
 	<button type="submit">Submit</button>
 </form>
 
-<a href="/actual-occupations">Back</a>
+<button on:click={() => (window.location.href = '/actual-occupations')}>Back</button>
