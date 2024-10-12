@@ -11,7 +11,7 @@
 		<DropDown
 			label="Expected Occupations"
 			name="expectedOccupation"
-			placeholder={data.expectedOccupationId}
+			defaultValue={data.expectedOccupationId}
 			options={data.expectedOccupationOptions}
 		/>
 	</div>
@@ -19,7 +19,7 @@
 		<DropDown
 			label="Actual Occupations"
 			name="actualOccupation"
-			placeholder={data.actualOccupationId}
+			defaultValue={data.actualOccupationId}
 			options={data.actualOccupationOptions}
 		/>
 	</div>
