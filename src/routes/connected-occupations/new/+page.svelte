@@ -1,11 +1,12 @@
 <script>
 	import DropDown from '$lib/components/input/DropDown.svelte';
+	import RadioButton from '$lib/components/input/RadioButton.svelte';
 	export let data;
 </script>
 
-<form method="post" action="?/createConnectedOccupations" class="form">
+<form method="post" action="?/createConnectedOccupations">
 	<div>
-		<DropDown
+		<RadioButton
 			label="Expected Occupations"
 			name="expectedOccupation"
 			options={data.expectedOccupationOptions}
@@ -23,7 +24,7 @@
 	</div>
 </form>
 
-<button on:click={() => (window.location.href = '/connected-occupations')}>back</button>
+<button on:click={() => (window.location.href = '/connected-occupations')}>Back</button>
 
 <style>
 	.form {

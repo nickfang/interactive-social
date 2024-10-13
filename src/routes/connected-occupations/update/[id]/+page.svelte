@@ -1,14 +1,16 @@
 <script>
 	import DropDown from '$lib/components/input/DropDown.svelte';
+	import RadioButton from '$lib/components/input/RadioButton.svelte';
 
 	export let data;
+	console.log('expectedOccupationId', data.expectedOccupationId);
 </script>
 
 <h1>Update Actual Occupation</h1>
 
 <form method="post" action="?/updateConnectedOccupations" class="form">
 	<div>
-		<DropDown
+		<RadioButton
 			label="Expected Occupations"
 			name="expectedOccupation"
 			defaultValue={data.expectedOccupationId}

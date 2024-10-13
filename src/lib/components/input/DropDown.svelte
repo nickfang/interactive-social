@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte';
-
 	export let name: string;
 	export let label: string;
 	export let defaultValue: string | null = null;
