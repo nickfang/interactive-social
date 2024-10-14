@@ -12,5 +12,3 @@
 	<input id="id" type="hidden" name="id" value={data.id} />
 	<button type="submit">Submit</button>
 </form>
-
-<button on:click={() => (window.location.href = '/actual-occupations')}>Back</button>
