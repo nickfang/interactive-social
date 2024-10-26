@@ -23,3 +23,4 @@ export async function updateConnectedOccupations(
 ) {
 	await db.update(joinOccupationsTable).set(data).where(eq(joinOccupationsTable.id, id));
 }
+

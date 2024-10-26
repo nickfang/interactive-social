@@ -1,9 +1,9 @@
 import { redirect } from '@sveltejs/kit';
-
-let isAuthenticated = false;
+import { getValue } from '$store/auth';
 
 export const load = async ({ url }) => {
-	isAuthenticated = false;
+	const isAuthenticated: boolean = getValue();
+	console.log('layout.server, isAuthenticated', isAuthenticated);
 	if (!isAuthenticated) {
 		throw redirect(302, `/login?redirectTo=${encodeURIComponent(url.href)}`);
 	}

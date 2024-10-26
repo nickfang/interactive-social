@@ -2,9 +2,10 @@ import { db } from '$db/db';
 import { deleteActualOccupationById } from '$db/queries/delete';
 import { actualOccupationTable } from '$db/schema';
 import { error } from '@sveltejs/kit';
+import { getValue } from '$lib/store/auth';
 
 export const load = async () => {
-	return { actualOccupations: await fetchData() };
+	return { actualOccupations: await fetchData(), isAuthenticated: getValue() };
 };
 
 const fetchData = async () => {

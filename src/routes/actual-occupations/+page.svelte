@@ -4,6 +4,7 @@
 	import TrashIcon from '$lib/components/icons/TrashIcon.svelte';
 
 	export let data;
+	const { isAuthenticated } = data;
 	async function handleDelete(id: number) {
 		if (confirm('Are you sure you want to delete this actual occupation?')) {
 			try {
@@ -32,6 +33,7 @@
 </script>
 
 <h1>Actual Occupations</h1>
+<p>Logged in: {isAuthenticated}</p>
 <button on:click={() => (window.location.href = '/actual-occupations/new')}>New</button>
 <ul>
 	{#each data.actualOccupations as actualOccupation}

@@ -1,6 +1,6 @@
 <script>
 	export let data;
-	let isAuthenticated = data.isAuthenticated;
+	$: ({ isAuthenticated } = data);
 </script>
 
 {#if isAuthenticated}
