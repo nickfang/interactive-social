@@ -10,8 +10,6 @@
 		selectedValue =
 			options.find((option) => option.value == defaultValue)?.value || options[0].value;
 	}
-
-	$: console.log('selectedValue:', selectedValue);
 </script>
 
 <div id={`radio-button-${name}`}>

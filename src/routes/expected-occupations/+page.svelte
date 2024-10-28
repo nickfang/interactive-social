@@ -16,7 +16,6 @@
 				});
 
 				if (response.ok) {
-					console.log('Expected occupation deleted successfully!');
 					// Remove deleted expected occupation instead of getting all the expected occupations again
 					data.expectedOccupations = data.expectedOccupations.filter(
 						(occupation) => occupation.id !== id

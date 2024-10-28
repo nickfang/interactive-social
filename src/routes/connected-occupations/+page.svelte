@@ -15,7 +15,6 @@
 				});
 
 				if (response.ok) {
-					console.log('Connected occupation deleted successfully!');
 					// Remove deleted actual occupation instead of getting all the actual occupations again
 					data.connectedOccupations = data.connectedOccupations.filter(
 						(connectedOccupation) => connectedOccupation.id !== id

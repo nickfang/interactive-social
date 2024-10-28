@@ -17,7 +17,7 @@ export const actions = {
 		try {
 			await deleteConnectedOccupationById(id);
 		} catch (e) {
-			console.log(e);
+      console.log('Error:', e)
 			return error(500, { message: 'Could not delete the connected occupation' });
 		}
 	}

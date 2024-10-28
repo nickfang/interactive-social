@@ -19,7 +19,7 @@ export const actions = {
 			const id = Number(data.get('id'));
 			await deleteActualOccupationById(id);
 		} catch (e) {
-			console.log(e);
+			console.log('Error:', e);
 			return error(500, { message: 'Could not delete the actual occupation' });
 		}
 		return {
