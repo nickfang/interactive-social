@@ -6,14 +6,6 @@
 		// Your authentication check function
 		return false;
 	};
-
-	export const load = async ({ url }) => {
-		isLoggedIn = checkAuthentication(); // Your authentication check function
-		console.log('isLoggedIn:', isLoggedIn);
-		if (!isLoggedIn) {
-			throw redirect(302, `/?redirectTo=${url.pathname}`);
-		}
-	};
 </script>
 
 <h3>Protected Layout Component</h3>
