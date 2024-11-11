@@ -1,4 +1,4 @@
-import { updateActualOccupation } from '$db/queries/update';
+import { updateActualOccupation } from '$db/queries/actualOccupation';
 import { redirect, error } from '@sveltejs/kit';
 
 export const actions = {

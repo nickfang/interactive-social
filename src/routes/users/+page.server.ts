@@ -1,5 +1,5 @@
 import { db } from '$db/db';
-import { usersTable } from '$db/schema';
+import { usersTable } from '$db/schema/users';
 
 export const load = async () => {
 	return { users: await fetchData() };

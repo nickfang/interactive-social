@@ -1,5 +1,6 @@
-import { getActualOccupations, getExpectedOccupations } from '$db/queries/select';
-import { updateConnectedOccupations } from '$db/queries/update';
+import { getActualOccupations } from '$db/queries/actualOccupation';
+import { getExpectedOccupations } from '$db/queries/expectedOccupation';
+import { updateConnectedOccupations } from '$db/queries/joinOccupation';
 import { redirect, error } from '@sveltejs/kit';
 
 const fetchData = async () => {

@@ -1,5 +1,7 @@
-import { getExpectedOccupationById } from '$db/queries/select.js';
-import { updateExpectedOccupation } from '$db/queries/update.js';
+import {
+	getExpectedOccupationById,
+	updateExpectedOccupation
+} from '$db/queries/expectedOccupation';
 import { error, redirect } from '@sveltejs/kit';
 
 const fetchData = async (id: string) => {
