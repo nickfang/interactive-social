@@ -1,54 +1,14 @@
-import { eq, or, isNull } from 'drizzle-orm';
+import { eq, or, isNull, and } from 'drizzle-orm';
 import { db } from '../db';
-import type { SelectUser } from '../schema';
-import {
-	actualOccupationTable,
-	expectedOccupationTable,
-	joinOccupationsTable,
-	usersTable
-} from '../schema';
+import { joinOccupationsTable } from '../schema/joinOccupations';
+import { expectedOccupationTable } from '../schema/expectedOccupations';
+import { actualOccupationTable } from '../schema/actualOccupations';
+import type { InsertJoinOccupation, SelectJoinOccupation } from '../schema/joinOccupations';
+import type { SelectExpectedOccupation } from '../schema/expectedOccupations';
+import type { SelectActualOccupation } from '../schema/actualOccupations';
 
-export async function getUserById(id: SelectUser['id']): Promise<
-	Array<{
-		id: number;
-		firstName: string | null;
-		lastName: string | null;
-		email: string | null;
-	}>
-> {
-	return db.selectDistinct().from(usersTable).where(eq(usersTable.id, id));
-}
-
-export async function getActualOccupations(): Promise<
-	Array<{ id: number; title: string; createdAt: Date; updatedAt: Date }>
-> {
-	return db.select().from(actualOccupationTable);
-}
-
-export async function getActualOccupationById(
-	id: number
-): Promise<{ id: number; createdAt: Date; title: string; updatedAt: Date }> {
-	return db
-		.select()
-		.from(actualOccupationTable)
-		.where(eq(actualOccupationTable.id, id))
-		.then((result) => result[0]);
-}
-
-export async function getExpectedOccupations(): Promise<
-	Array<{ id: number; title: string; createdAt: Date; updatedAt: Date }>
-> {
-	return db.select().from(expectedOccupationTable);
-}
-
-export async function getExpectedOccupationById(
-	id: number
-): Promise<{ id: number; title: string; createdAt: Date; updatedAt: Date }> {
-	return db
-		.select()
-		.from(expectedOccupationTable)
-		.where(eq(expectedOccupationTable.id, id))
-		.then((result) => result[0]);
+export async function createConnectedOccupations(data: InsertJoinOccupation) {
+	await db.insert(joinOccupationsTable).values(data);
 }
 
 export const getConnectedOccupations = async () => {
@@ -98,3 +58,28 @@ export const getInvalidConnectedOccupations = async () => {
 			)
 		);
 };
+
+export async function updateConnectedOccupations(
+	id: number,
+	data: { expectedOccupationId: number; actualOccupationId: number }
+) {
+	await db.update(joinOccupationsTable).set(data).where(eq(joinOccupationsTable.id, id));
+}
+
+export async function deleteConnectedOccupationById(id: SelectJoinOccupation['id']) {
+	await db.delete(joinOccupationsTable).where(eq(joinOccupationsTable.id, id));
+}
+
+export async function deleteConnectedOccupationByIds(
+	actualOccupationId: SelectActualOccupation['id'],
+	expectedOccupationId: SelectExpectedOccupation['id']
+) {
+	await db
+		.delete(joinOccupationsTable)
+		.where(
+			and(
+				eq(joinOccupationsTable.actualOccupationId, actualOccupationId),
+				eq(joinOccupationsTable.expectedOccupationId, expectedOccupationId)
+			)
+		);
+}

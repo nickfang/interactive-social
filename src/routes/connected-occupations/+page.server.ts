@@ -1,5 +1,4 @@
-import { deleteConnectedOccupationById } from '$db/queries/delete';
-import { getConnectedOccupations } from '$db/queries/select';
+import { deleteConnectedOccupationById, getConnectedOccupations } from '$db/queries/joinOccupation';
 import { error } from '@sveltejs/kit';
 
 export const load = async () => {
@@ -17,7 +16,7 @@ export const actions = {
 		try {
 			await deleteConnectedOccupationById(id);
 		} catch (e) {
-      console.log('Error:', e)
+			console.log('Error:', e);
 			return error(500, { message: 'Could not delete the connected occupation' });
 		}
 	}

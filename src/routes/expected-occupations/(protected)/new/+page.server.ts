@@ -1,4 +1,4 @@
-import { createExpectedOccupation } from '$db/queries/insert';
+import { createExpectedOccupation } from '$db/queries/expectedOccupation';
 import { redirect, error } from '@sveltejs/kit';
 
 export const actions = {

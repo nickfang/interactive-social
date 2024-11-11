@@ -1,10 +1,11 @@
-import { createUser } from '$db/queries/insert';
+import { createUser } from '$db/queries/user';
+import type { InsertUser } from '$db/schema/users.js';
 import { redirect, error } from '@sveltejs/kit';
 
 export const actions = {
 	createUser: async ({ request }) => {
 		const data = await request.formData();
-		const user = Object.fromEntries(data);
+		const user: InsertUser = Object.fromEntries(data);
 		try {
 			await createUser(user);
 		} catch (e) {

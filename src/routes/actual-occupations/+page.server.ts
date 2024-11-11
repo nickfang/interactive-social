@@ -1,6 +1,6 @@
 import { db } from '$db/db';
-import { deleteActualOccupationById } from '$db/queries/delete';
-import { actualOccupationTable } from '$db/schema';
+import { deleteActualOccupationById } from '$db/queries/actualOccupation';
+import { actualOccupationTable } from '$db/schema/actualOccupations';
 import { error } from '@sveltejs/kit';
 import { getValue } from '$lib/store/auth';
 

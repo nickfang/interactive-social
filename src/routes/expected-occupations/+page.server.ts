@@ -1,6 +1,6 @@
 import { db } from '$db/db';
-import { deleteExpectedOccupationById } from '$db/queries/delete';
-import { expectedOccupationTable } from '$db/schema';
+import { deleteExpectedOccupationById } from '$db/queries/expectedOccupation';
+import { expectedOccupationTable } from '$db/schema/expectedOccupations';
 import { error } from '@sveltejs/kit';
 
 export const load = async () => {
