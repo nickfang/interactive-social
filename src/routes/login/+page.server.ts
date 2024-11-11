@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { getValue, setValue } from '$lib/store/auth';
+import { getValue, setValue } from '$store/mockAuth';
 
 export const load = (async ({ url }) => {
 	const redirectTo = url.searchParams.get('redirectTo') || '/';

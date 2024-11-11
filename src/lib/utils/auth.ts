@@ -1,4 +1,4 @@
-import { getValue } from '$store/auth';
+import { getValue } from '$store/mockAuth';
 
 export const checkAuthentication = async (): Promise<{
 	isAuthenticated: boolean;

@@ -1,4 +1,4 @@
-import { getValue } from '$lib/store/auth';
+import { getValue } from '$store/mockAuth';
 
 export const load = () => {
 	return {
